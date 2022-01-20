@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <title>Autor</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>idAutor</th>
+            <th>Nume</th>
+            <th>Prenume</th>
+            <th>Data Nasterii</th>
+        </tr>
+        <% for(var i = 0; i < autori_ui.length; i++) { %>
+            <tr>
+                <form action="views/autor" method="post">
+                    <td>
+                        <%=autori_ui[i].idAutor %>
+                    </td>
+                    <td>
+                        <%=autori_ui[i].Nume %>
+                    </td>
+                    <td>
+                        <%=autori_ui[i].Prenume %>
+                    </td>
+                    <td>
+                        <%=autori_ui[i].DataNașterii %>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <title>InstanțăCarte</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>ISBN</th>
+            <th>idCarte</th>
+            <th>idEditură</th>
+            <th>idLocație</th>
+            <th>idLimbă</th>
+            <th>nrPagini</th>
+        </tr>
+        <% for(var i = 0; i < instantacarte_ui.length; i++) { %>
+            <tr>
+                <form action="views/instantacarte" method="post">
+                    <td>
+                        <%=instantacarte_ui[i].ISBN %>
+                    </td>
+                    <td>
+                        <%=instantacarte_ui[i].idCarte %>
+                    </td>
+                    <td>
+                        <%=instantacarte_ui[i].idEditură %>
+                    </td>
+                    <td>
+                        <%=instantacarte_ui[i].idLocație %>
+                    </td>
+                    <td>
+                        <%=instantacarte_ui[i].idLimbă %>
+                    </td>
+                    <td>
+                        <%=instantacarte_ui[i].nrPagini %>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

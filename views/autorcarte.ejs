@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <title>AutorCarte</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>idCarte</th>
+            <th>idAutor</th>
+            <th>pozAutor</th>
+        </tr>
+        <% for(var i = 0; i < autorcarte_ui.length; i++) { %>
+            <tr>
+                <form action="views/autorcarte" method="post">
+                    <td>
+                        <%=autorcarte_ui[i].idCarte %>
+                    </td>
+                    <td>
+                        <%=autorcarte_ui[i].idAutor %>
+                    </td>
+                    <td>
+                        <%=autorcarte_ui[i].pozAutor %>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

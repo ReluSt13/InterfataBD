@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <title>GenCarte</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>idCarte</th>
+            <th>idGen</th>
+            <th>pozGen</th>
+        </tr>
+        <% for(var i = 0; i < gencarte_ui.length; i++) { %>
+            <tr>
+                <form action="views/gencarte" method="post">
+                    <td>
+                        <%=gencarte_ui[i].idCarte %>
+                    </td>
+                    <td>
+                        <%=gencarte_ui[i].idGen %>
+                    </td>
+                    <td>
+                        <%=gencarte_ui[i].pozGen %>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

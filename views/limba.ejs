@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <title>Limbă</title>
+</head>
+<body>
+    <table>
+            <th>idLimbă</th>
+            <th>numeLimbă</th>
+        </tr>
+        <% for(var i = 0; i < limbi_ui.length; i++) { %>
+            <tr>
+                <form action="views/limba" method="post">
+                    <td>
+                        <%=limbi_ui[i].idLimbă %>
+                    </td>
+                    <td>
+                        <%=limbi_ui[i].numeLimbă %>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <title>Gen</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>idGen</th>
+            <th>Nume Gen</th>
+        </tr>
+        <% for(var i = 0; i < genuri_ui.length; i++) { %>
+            <tr>
+                <form action="views/gen" method="post">
+                    <td>
+                        <%=genuri_ui[i].idGen %>
+                    </td>
+                    <td>
+                        <%=genuri_ui[i].numeGen %>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

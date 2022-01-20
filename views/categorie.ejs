@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <title>Categorie</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>idCategorie</th>
+            <th>Nume Categorie</th>
+        </tr>
+        <% for(var i = 0; i < categorii_ui.length; i++) { %>
+            <tr>
+                <form action="views/categorie" method="post">
+                    <td>
+                        <%=categorii_ui[i].idCategorie %>
+                    </td>
+                    <td>
+                        <%=categorii_ui[i].numeCategorie %>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>
