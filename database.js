@@ -324,6 +324,28 @@ app.get("/views/autorcarte.ejs", function (req, res) {
     })
 });
 
+app.post("/adaugaAutorCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql;
+    if(fields.pozAutor == '') {
+        sql = "INSERT INTO proiectbd.autorcarte " +
+            "values ('" + fields.idAutor + "', '" + fields.idCarte + "', null);";
+    }else {
+        sql = "INSERT INTO proiectbd.autorcarte " +
+            "values ('" + fields.idAutor + "', '" + fields.idCarte + "', '" + fields.pozAutor + "');";
+    }
+    
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        res.redirect('/views/autorcarte.ejs');
+      });
+    });
+});
+
 app.get("/views/gencarte.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.gencarte', function(err, result, fields) {
         if(err) throw err;
@@ -342,6 +364,28 @@ app.get("/views/gencarte.ejs", function (req, res) {
 
         res.render("views/gencarte.ejs", {gencarte_ui: gencarte});
     })
+});
+
+app.post("/adaugaGenCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql;
+    if(fields.pozGen == '') {
+        sql = "INSERT INTO proiectbd.gencarte " +
+            "values ('" + fields.idGen + "', '" + fields.idCarte + "', null);";
+    }else {
+        sql = "INSERT INTO proiectbd.gencarte " +
+            "values ('" + fields.idGen + "', '" + fields.idCarte + "', '" + fields.pozGen + "');";
+    }
+    
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        res.redirect('/views/gencarte.ejs');
+      });
+    });
 });
 
 app.get("/views/instantacarte.ejs", function (req, res) {
@@ -365,6 +409,32 @@ app.get("/views/instantacarte.ejs", function (req, res) {
 
         res.render("views/instantacarte.ejs", {instantacarte_ui: instantacarte});
     })
+});
+
+app.post("/adaugaInstantaCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql;
+    if(fields.nrPagini == '') {
+        sql = "INSERT INTO proiectbd.instanțăcarte " +
+            "values ('" + fields.ISBN + "', '" + fields.idCarte +
+            "', '" + fields.idEditură + "', '" + fields.idLocație +
+            "', '" + fields.idLimbă + "', null);";
+    }else {
+        sql = "INSERT INTO proiectbd.instanțăcarte " +
+            "values ('" + fields.ISBN + "', '" + fields.idCarte +
+            "', '" + fields.idEditură + "', '" + fields.idLocație +
+            "', '" + fields.idLimbă + "', '" + fields.nrPagini + "');";
+    }
+    
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        res.redirect('/views/instantacarte.ejs');
+      });
+    });
 });
 
 app.listen(port, function(error) {

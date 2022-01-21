@@ -8,20 +8,23 @@
     <title>AutorCarte</title>
 </head>
 <body>
+    <div class="container">
+        <a href="/views/index.ejs" class="home">HOME</a>
+    </div>
     <table>
         <tr>
-            <th>idCarte</th>
             <th>idAutor</th>
+            <th>idCarte</th>
             <th>pozAutor</th>
         </tr>
         <% for(var i = 0; i < autorcarte_ui.length; i++) { %>
             <tr>
                 <form action="views/autorcarte" method="post">
                     <td>
-                        <%=autorcarte_ui[i].idCarte %>
+                        <%=autorcarte_ui[i].idAutor %>
                     </td>
                     <td>
-                        <%=autorcarte_ui[i].idAutor %>
+                        <%=autorcarte_ui[i].idCarte %>
                     </td>
                     <td>
                         <%=autorcarte_ui[i].pozAutor %>
@@ -29,6 +32,27 @@
                 </form>
             </tr>
         <% } %>
+        <form action="/adaugaAutorCarte" method="post">
+            <tr>
+                
+                    <td>
+                        <input type="text" name="idAutor" required>
+                    </td>
+                    <td>
+                        <input type="text" name="idCarte" required>
+                    </td>
+                    <td>
+                        <input type="text" name="pozAutor">
+                    </td>
+            </tr>
+            <tr>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit">
+                    <input type="submit" class="button" value="Adauga">
+                </td>
+            </tr>
+        </form>
     </table>
 </body>
 </html>

@@ -8,6 +8,10 @@
     <title>InstanțăCarte</title>
 </head>
 <body>
+    <div class="container">
+        <a href="/views/index.ejs" class="home">HOME</a>
+    </div>
+    
     <table>
         <tr>
             <th>ISBN</th>
@@ -41,6 +45,39 @@
                 </form>
             </tr>
         <% } %>
+        <form action="/adaugaInstantaCarte" method="post">
+            <tr>
+                
+                    <td>
+                        <input type="text" name="ISBN" required>
+                    </td>
+                    <td>
+                        <input type="text" name="idCarte" required>
+                    </td>
+                    <td>
+                        <input type="text" name="idEditură" required>
+                    </td>
+                    <td>
+                        <input type="text" name="idLocație" required>
+                    </td>
+                    <td>
+                        <input type="text" name="idLimbă" required>
+                    </td>
+                    <td>
+                        <input type="text" name="nrPagini">
+                    </td>
+            </tr>
+            <tr>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit">
+                    <input type="submit" class="button" value="Adauga">
+                </td>
+            </tr>
+        </form>
     </table>
 </body>
 </html>

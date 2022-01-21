@@ -8,20 +8,23 @@
     <title>GenCarte</title>
 </head>
 <body>
+    <div class="container">
+        <a href="/views/index.ejs" class="home">HOME</a>
+    </div>
     <table>
         <tr>
-            <th>idCarte</th>
             <th>idGen</th>
+            <th>idCarte</th>
             <th>pozGen</th>
         </tr>
         <% for(var i = 0; i < gencarte_ui.length; i++) { %>
             <tr>
                 <form action="views/gencarte" method="post">
                     <td>
-                        <%=gencarte_ui[i].idCarte %>
+                        <%=gencarte_ui[i].idGen %>
                     </td>
                     <td>
-                        <%=gencarte_ui[i].idGen %>
+                        <%=gencarte_ui[i].idCarte %>
                     </td>
                     <td>
                         <%=gencarte_ui[i].pozGen %>
@@ -29,6 +32,27 @@
                 </form>
             </tr>
         <% } %>
+        <form action="/adaugaGenCarte" method="post">
+            <tr>
+                
+                    <td>
+                        <input type="text" name="idGen" required>
+                    </td>
+                    <td>
+                        <input type="text" name="idCarte" required>
+                    </td>
+                    <td>
+                        <input type="text" name="pozGen">
+                    </td>
+            </tr>
+            <tr>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit">
+                    <input type="submit" class="button" value="Adauga">
+                </td>
+            </tr>
+        </form>
     </table>
 </body>
 </html>

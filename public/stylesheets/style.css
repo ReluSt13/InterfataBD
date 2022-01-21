@@ -82,3 +82,19 @@ body{
   cursor: pointer;
   color: #f87b07;
 }
+.container {
+  width: 98.5%;
+  text-align: left;
+  margin-top: 1.25%;
+  float: right;
+}
+.home {
+  color: #fddb3a;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+}
+.home:hover {
+  cursor: pointer;
+  color: #f87b07;
+}
