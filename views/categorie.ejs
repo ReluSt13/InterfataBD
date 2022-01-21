@@ -25,6 +25,23 @@
                 </form>
             </tr>
         <% } %>
+        <form action="/adaugaCategorie" method="post">
+            <tr>
+                
+                    <td>
+                        <input type="text" name="idCategorie" required>
+                    </td>
+                    <td>
+                        <input type="text" name="numeCategorie" required>
+                    </td>
+            </tr>
+            <tr>
+                <td class="submit"></td>
+                <td class="submit">
+                    <input type="submit" class="button" value="Adauga">
+                </td>
+            </tr>
+        </form>
     </table>
 </body>
 </html>

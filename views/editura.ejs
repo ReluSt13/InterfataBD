@@ -29,6 +29,27 @@
                 </form>
             </tr>
         <% } %>
+        <form action="/adaugaEditura" method="post">
+            <tr>
+                
+                    <td>
+                        <input type="text" name="idEditură" required>
+                    </td>
+                    <td>
+                        <input type="text" name="numeEditură" required>
+                    </td>
+                    <td>
+                        <input type="text" name="Oraș" required>
+                    </td>
+            </tr>
+            <tr>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit">
+                    <input type="submit" class="button" value="Adauga">
+                </td>
+            </tr>
+        </form>
     </table>
 </body>
 </html>

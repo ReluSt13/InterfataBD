@@ -29,6 +29,27 @@
                 </form>
             </tr>
         <% } %>
+        <form action="/adaugaCarte" method="post">
+            <tr>
+                
+                    <td>
+                        <input type="text" name="idCarte" required>
+                    </td>
+                    <td>
+                        <input type="text" name="Titlu" required>
+                    </td>
+                    <td>
+                        <input type="text" name="idCategorie">
+                    </td>
+            </tr>
+            <tr>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit">
+                    <input type="submit" class="button" value="Adauga">
+                </td>
+            </tr>
+        </form>
     </table>
 </body>
 </html>

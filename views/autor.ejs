@@ -27,12 +27,41 @@
                     <td>
                         <%=autori_ui[i].Prenume %>
                     </td>
-                    <td>
-                        <%=autori_ui[i].DataNașterii %>
-                    </td>
+                    <% if(autori_ui[i].DataNașterii == null) { %>
+                        <td></td>
+                    <% } else { %>
+                        <td>
+                            <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date(autori_ui[i].DataNașterii)) %>
+                        </td>
+                    <% } %>
                 </form>
             </tr>
         <% } %>
+        <form action="/adaugaAutor" method="post">
+            <tr>
+                
+                    <td>
+                        <input type="text" name="idAutor" required>
+                    </td>
+                    <td>
+                        <input type="text" name="Nume" required>
+                    </td>
+                    <td>
+                        <input type="text" name="Prenume" required>
+                    </td>
+                    <td>
+                        <input type="date" name="DataNașterii">
+                    </td>
+            </tr>
+            <tr>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit"></td>
+                <td class="submit">
+                    <input type="submit" class="button" value="Adauga">
+                </td>
+            </tr>
+        </form>
     </table>
 </body>
 </html>

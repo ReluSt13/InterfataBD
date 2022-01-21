@@ -50,6 +50,31 @@ app.get("/views/carte.ejs", function (req, res) {
     })
 });
 
+app.post("/adaugaCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql;
+
+    if(fields.idCategorie == '') {
+        sql = "INSERT INTO proiectbd.carte " +
+        "values ('" + fields.idCarte + "', '" + fields.Titlu + "', null);";
+    }
+    else {
+        sql = "INSERT INTO proiectbd.carte " +
+        "values ('" + fields.idCarte + "', '" + fields.Titlu + "', '" + fields.idCategorie + "');";
+    }
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Carte adaugata!");
+        res.redirect('/views/carte.ejs');
+      });
+    });
+});
+
 app.get("/views/autor.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.autor', function(err, result, fields) {
         if(err) throw err;
@@ -71,6 +96,32 @@ app.get("/views/autor.ejs", function (req, res) {
     })
 });
 
+app.post("/adaugaAutor", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql;
+
+    if(fields.DataNașterii == '') {
+        sql = "INSERT INTO proiectbd.autor " +
+        "values ('" + fields.idAutor + "', '" + fields.Nume + "', '" + fields.Prenume + "', null);";
+    }
+    else {
+        sql = "INSERT INTO proiectbd.autor " +
+        "values ('" + fields.idAutor + "', '" + fields.Nume + "', '" + fields.Prenume + "', '" +
+        fields.DataNașterii + "');";
+    }
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Autor adaugat!");
+        res.redirect('/views/autor.ejs');
+      });
+    });
+});
+
 app.get("/views/categorie.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.categorie order by idCategorie;', function(err, result, fields) {
         if(err) throw err;
@@ -90,6 +141,23 @@ app.get("/views/categorie.ejs", function (req, res) {
     })
 });
 
+app.post("/adaugaCategorie", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "INSERT INTO proiectbd.categorie values ('" + fields.idCategorie + "', '" + fields.numeCategorie + "');";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Categorie adaugata!");
+        res.redirect('/views/categorie.ejs');
+      });
+    });
+});
+
 app.get("/views/gen.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.gen order by idGen', function(err, result, fields) {
         if(err) throw err;
@@ -107,6 +175,23 @@ app.get("/views/gen.ejs", function (req, res) {
 
         res.render("views/gen.ejs", {genuri_ui: genuri});
     })
+});
+
+app.post("/adaugaGen", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "INSERT INTO proiectbd.gen values ('" + fields.idGen + "', '" + fields.numeGen + "');";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Gen adaugat!");
+        res.redirect('/views/gen.ejs');
+      });
+    });
 });
 
 app.get("/views/editura.ejs", function (req, res) {
@@ -129,6 +214,24 @@ app.get("/views/editura.ejs", function (req, res) {
     })
 });
 
+app.post("/adaugaEditura", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "INSERT INTO proiectbd.editură " +
+        "values ('" + fields.idEditură + "', '" + fields.numeEditură + "', '" + fields.Oraș + "');";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Editură adaugată!");
+        res.redirect('/views/editura.ejs');
+      });
+    });
+});
+
 app.get("/views/locatie.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.locație order by idLocație', function(err, result, fields) {
         if(err) throw err;
@@ -146,6 +249,23 @@ app.get("/views/locatie.ejs", function (req, res) {
 
         res.render("views/locatie.ejs", {locații_ui: locații});
     })
+});
+
+app.post("/adaugaLocatie", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "INSERT INTO proiectbd.locație values ('" + fields.idLocație + "', '" + fields.Cameră + "');";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Cameră adaugată!");
+        res.redirect('/views/locatie.ejs');
+      });
+    });
 });
 
 app.get("/views/limba.ejs", function (req, res) {
@@ -167,6 +287,22 @@ app.get("/views/limba.ejs", function (req, res) {
     })
 });
 
+app.post("/adaugaLimba", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "INSERT INTO proiectbd.limbă values ('" + fields.idLimbă + "', '" + fields.numeLimbă + "');";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Limbă adaugată!");
+        res.redirect('/views/limba.ejs');
+      });
+    });
+});
 
 app.get("/views/autorcarte.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.autorcarte', function(err, result, fields) {
