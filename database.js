@@ -84,13 +84,13 @@ app.post("/updateCarte", function (req, res) {
     if(fields.idCategorie == '') {
         sql = "UPDATE proiectbd.carte " +
         "SET idCarte = '" + fields.idCarte + "', Titlu = '" + fields.Titlu + "', idCategorie = null WHERE idCarte = '" + 
-        fields.idCarte + "';";
+        fields.idCarteV + "';";
     }
     else {
         sql = "UPDATE proiectbd.carte " +
         "SET idCarte = '" + fields.idCarte + "', Titlu = '" + fields.Titlu + "', idCategorie = '" + fields.idCategorie + "'" +
-        "WHERE idCarte = '" + fields.idCarte + "';"; //la where idCarte=fields.idCarte nu ar treb sa fie asa
-        //pt ca idCarte nu o sa fie niciodata egal cu fields.idCarte daca vreau sa modific idCarte :(
+        "WHERE idCarte = '" + fields.idCarteV + "';"; 
+        
     }
 
     con.query(sql, function (err, result, fields) {
