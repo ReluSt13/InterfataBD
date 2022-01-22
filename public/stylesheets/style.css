@@ -98,3 +98,9 @@ body{
   cursor: pointer;
   color: #f87b07;
 }
+.color {
+  color: #fddb3a;
+}
+.margin {
+  margin-top: 2px;
+}

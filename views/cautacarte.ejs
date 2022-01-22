@@ -8,8 +8,70 @@
     <title>Caută</title>
 </head>
 <body>
+    <form id="cautaCarte" action="/cautaCarte" method="post"></form>
     <div class="container">
         <a href="/views/index.ejs" class="home">HOME</a>
+        <br><br>
+        <label for="criteriu1" class="color">Alege un criteriu: </label>
+        <br>
+        <select form="cautaCarte" name="criteriu1" id="criteriu1" required>
+            <option value="Titlu">Titlu</option>
+            <option value="Nume">Autor</option>
+            <option value="Cameră">Locație</option>
+            <option value="numeEditură">Editură</option>
+            <option value="numeLimbă">Limbă</option>
+            <option value="numeCategorie">Categorie</option>
+            <option value="numeGen">Gen</option>
+            <option value=""></option>
+        </select>
+        <br>
+        <input form="cautaCarte" type="text" name="valIntrodusa" class="margin">
+        <br>
+        <input form="cautaCarte" type="submit" class="margin" value="Caută">
     </div>
+    <table>
+        <tr>
+            <th>Titlu</th>
+            <th>Nume</th>
+            <th>Prenume</th>
+            <th>Editură</th>
+            <th>Cameră</th>
+            <th>Limbă</th>
+            <th>Categorie</th>
+            <th>Gen</th>
+            <th>Nr.Pagini</th>
+        </tr>
+        <% if(cauta_ui != null) { for(var i = 0; i < cauta_ui.length; i++) { %>
+            <tr>
+                <td>
+                    <%=cauta_ui[i].Titlu %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].Nume %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].Prenume %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].numeEditură %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].Cameră %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].numeLimbă %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].numeCategorie %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].numeGen %>
+                </td>
+                <td>
+                    <%=cauta_ui[i].nrPagini %>
+                </td>
+            </tr>
+        <% } } %>
+    </table>
 </body>
 </html>

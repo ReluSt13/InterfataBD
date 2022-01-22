@@ -26,7 +26,7 @@ app.get("/", function (req, res) {
     res.render("views/index.ejs");
 });
 app.get("/views/cautacarte.ejs", function(req, res) {
-    res.render("views/cautacarte.ejs");
+    res.render("views/cautacarte.ejs", {cauta_ui: null});
 });
 app.get("/views/index.ejs", function (req, res) {
     res.render("views/index.ejs");
@@ -560,6 +560,55 @@ app.post("/adaugaInstantaCarte", function (req, res) {
         res.redirect('/views/instantacarte.ejs');
       });
     });
+});
+
+
+app.post("/cautaCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        var sql
+        if(fields.criteriu1 != ''){
+            sql = 'select Titlu, Nume, Prenume, numeEditură, Cameră, numeLimbă, numeCategorie, numeGen, nrPagini ' +
+            'from proiectbd.carte join proiectbd.instanțăcarte using(idCarte)' +
+            ' join proiectbd.editură using(idEditură)' +
+            ' join proiectbd.limbă using(idLimbă)' +
+            ' join proiectbd.locație using(idLocație)' +
+            ' join proiectbd.autorcarte using(idCarte)' +
+            ' join proiectbd.autor using(idAutor)' +
+            ' join proiectbd.gencarte using(idCarte)' +
+            ' join proiectbd.gen using (idGen)' +
+            ' join proiectbd.categorie using(idCategorie)' + 
+            ' where ' + fields.criteriu1 + " = '" + fields.valIntrodusa + "' and pozGen = 1;";
+        
+            con.query(sql, function(err, result, fields) {
+                if(err) throw err;
+        
+                var cartiGasite = [];
+                
+                result.forEach(function (element) {
+                    cartiGasite.push({
+                        Titlu: element.Titlu,
+                        Nume: element.Nume,
+                        Prenume: element.Prenume,
+                        numeEditură: element.numeEditură,
+                        Cameră: element.Cameră,
+                        numeLimbă: element.numeLimbă,
+                        numeCategorie: element.numeCategorie,
+                        numeGen: element.numeGen,
+                        nrPagini: element.nrPagini
+                    });
+                }, this);
+        
+                console.log(cartiGasite);
+        
+                res.render("views/cautacarte.ejs", {cauta_ui: cartiGasite});
+            })
+        }
+        else {
+            res.render("views/cautacarte.ejs", {cauta_ui: null})
+        }
+    });
+    
 });
 
 app.listen(port, function(error) {
