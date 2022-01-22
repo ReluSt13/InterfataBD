@@ -697,6 +697,61 @@ app.post("/cautaCarte", function (req, res) {
     
 });
 
+app.get("/views/statistica.ejs", function (req, res) {
+    con.query('SELECT count(*) nr FROM proiectbd.instanțăcarte;', function(err, result, fields) {
+        if(err) throw err;
+
+        var nrCarți = [];
+        result.forEach(function (element) {
+            nrCarți.push({
+                nr: element.nr
+            });
+        }, this);
+
+        console.log(nrCarți);
+
+        con.query('select numeGen, count(numeGen) nr ' +
+                    'from proiectbd.carte join proiectbd.instanțăcarte using(idCarte) join proiectbd.editură using(idEditură) join proiectbd.limbă using(idLimbă) join proiectbd.locație using(idLocație) join proiectbd.autorcarte using(idCarte) ' +
+                    'join proiectbd.autor using(idAutor) left join proiectbd.categorie using(idCategorie) left join proiectbd.gencarte using(idCarte) left join proiectbd.gen using (idGen) ' +
+                    "where lower(Titlu) like '%%' " +
+                        "and lower(Nume) like '%%' " +
+                        "and lower(Prenume) like '%%' " +
+                        "and lower(numeEditură) like '%%' " +
+                        "and Cameră like '%%' " +
+                        "and numeLimbă like '%%' " +
+                        "and coalesce(numeCategorie, '') like '%%' " +
+                        "and coalesce(numeGen, '') like '%%' " +
+                    "group by numeGen " +
+                    "having count(numeGen) = (select count(numeGen) " +
+                                            "from proiectbd.carte join proiectbd.instanțăcarte using(idCarte) join proiectbd.editură using(idEditură) join proiectbd.limbă using(idLimbă) join proiectbd.locație using(idLocație) join proiectbd.autorcarte using(idCarte) " +
+                                                "join proiectbd.autor using(idAutor) left join proiectbd.categorie using(idCategorie) left join proiectbd.gencarte using(idCarte) left join proiectbd.gen using (idGen) " +
+                                                "where lower(Titlu) like '%%' " +
+                                                    "and lower(Nume) like '%%' " +
+                                                    "and lower(Prenume) like '%%' " +
+                                                    "and lower(numeEditură) like '%%' " +
+                                                    "and Cameră like '%%' " +
+                                                    "and numeLimbă like '%%' " +
+                                                    "and coalesce(numeCategorie, '') like '%%' " +
+                                                    "and coalesce(numeGen, '') like '%%' " +
+                                                "group by numeGen " +
+                                                "order by count(numeGen) desc " +
+                                                "LIMIT 1);",
+        function(err, result, fields) {
+            if(err) throw err;
+            var genPop = [];
+            result.forEach(function (element) {
+                genPop.push({
+                    numeGen: element.numeGen,
+                    nr: element.nr
+                });
+            }, this);
+            console.log(genPop);
+            res.render("views/statistica.ejs", {nrcarti_ui: nrCarți, genpop_ui: genPop});
+        })
+        
+    })
+});
+
 app.listen(port, function(error) {
     if (error) {
         console.log("Something went wrong!", error);
