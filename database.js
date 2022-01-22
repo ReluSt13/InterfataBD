@@ -75,6 +75,34 @@ app.post("/adaugaCarte", function (req, res) {
     });
 });
 
+app.post("/updateCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql;
+
+    if(fields.idCategorie == '') {
+        sql = "UPDATE proiectbd.carte " +
+        "SET idCarte = '" + fields.idCarte + "', Titlu = '" + fields.Titlu + "', idCategorie = null WHERE idCarte = '" + 
+        fields.idCarte + "';";
+    }
+    else {
+        sql = "UPDATE proiectbd.carte " +
+        "SET idCarte = '" + fields.idCarte + "', Titlu = '" + fields.Titlu + "', idCategorie = '" + fields.idCategorie + "'" +
+        "WHERE idCarte = '" + fields.idCarte + "';"; //la where idCarte=fields.idCarte nu ar treb sa fie asa
+        //pt ca idCarte nu o sa fie niciodata egal cu fields.idCarte daca vreau sa modific idCarte :(
+    }
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("Carte updatata!");
+        res.redirect('/views/carte.ejs');
+      });
+    });
+});
+
 app.get("/views/autor.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.autor', function(err, result, fields) {
         if(err) throw err;

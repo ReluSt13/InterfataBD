@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <script src="../scripts/script.js"></script>
     <title>Carte</title>
 </head>
 <body>
@@ -16,20 +17,29 @@
             <th>idCarte</th>
             <th>Titlu</th>
             <th>idCategorie</th>
+            <th>Edit</th>
         </tr>
         <% for(var i = 0; i < carti_ui.length; i++) { %>
             <tr>
-                <form action="views/carte" method="post">
-                    <td>
-                        <%=carti_ui[i].idCarte %>
-                    </td>
-                    <td>
-                        <%=carti_ui[i].Titlu %>
-                    </td>
-                    <td>
-                        <%=carti_ui[i].idCategorie %>
-                    </td>
-                </form>
+                <form id="updateForm<%=i%>" action="/updateCarte" method="post"></form>
+                <form id="fillForm"action="views/carte" method="post"></form>
+                <td>
+                    <p id="idCarte<%=i%>"><%=carti_ui[i].idCarte %></p> 
+                    <input form="updateForm<%=i%>" type="text" name="idCarte" style="display: none" id="idCarteE<%=i%>" value=<%=carti_ui[i].idCarte %>>
+                </td>
+                <td>
+                    <p id="Titlu<%=i%>"><%=carti_ui[i].Titlu %></p>
+                    <input form="updateForm<%=i%>" type="text" name="Titlu" style="display: none" id="TitluE<%=i%>" value=<%=carti_ui[i].Titlu %>>
+                </td>
+                <td>
+                    <p id="idCategorie<%=i%>"><%=carti_ui[i].idCategorie %></p>
+                    <input form="updateForm<%=i%>" type="text" name="idCategorie" style="display: none" id="idCategorieE<%=i%>" value=<%=carti_ui[i].idCategorie %>>
+                </td>
+                <td>
+                    <button form="updateForm<%=i%>" type="button" onclick="showEdit('<%= i %>')" id="editB<%=i%>">EDIT</button>
+                    <button type="submit" form="updateForm<%=i%>" style="display: none;" id="saveB<%=i%>">SAVE</button>
+                    <button form="updateForm<%=i%>" type="button" style="display: none;" onclick="closeEdit('<%= i %>')" id="cancelB<%=i%>">CANCEL</button>
+                </td>
             </tr>
         <% } %>
         <form action="/adaugaCarte" method="post">
@@ -46,6 +56,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">
