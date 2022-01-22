@@ -18,15 +18,18 @@
             <th>Titlu</th>
             <th>idCategorie</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < carti_ui.length; i++) { %>
             <tr>
                 <form id="updateForm<%=i%>" action="/updateCarte" method="post"></form>
+                <form id="deleteForm<%=i%>" action="/deleteCarte" method="post"></form>
                 <form id="fillForm"action="views/carte" method="post"></form>
                 <td>
                     <p id="idCarte<%=i%>"><%=carti_ui[i].idCarte %></p> 
                     <input form="updateForm<%=i%>" type="text" name="idCarte" style="display: none" id="idCarteE<%=i%>" value=<%=carti_ui[i].idCarte %>>
                     <input form="updateForm<%=i%>" type="hidden" name="idCarteV" value=<%=carti_ui[i].idCarte%>>
+                    <input form="deleteForm<%=i%>" type="hidden" name="idCarteV" value=<%=carti_ui[i].idCarte%>>
                 </td>
                 <td>
                     <p id="Titlu<%=i%>"><%=carti_ui[i].Titlu %></p>
@@ -40,6 +43,9 @@
                     <button form="updateForm<%=i%>" type="button" onclick="showEdit('<%= i %>')" id="editB<%=i%>">EDIT</button>
                     <button type="submit" form="updateForm<%=i%>" style="display: none;" id="saveB<%=i%>">SAVE</button>
                     <button form="updateForm<%=i%>" type="button" style="display: none;" onclick="closeEdit('<%= i %>')" id="cancelB<%=i%>">CANCEL</button>
+                </td>
+                <td>
+                    <button form="deleteForm<%=i%>">X</button>
                 </td>
             </tr>
         <% } %>
@@ -57,6 +63,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>

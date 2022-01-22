@@ -103,6 +103,22 @@ app.post("/updateCarte", function (req, res) {
     });
 });
 
+app.post("/deleteCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "DELETE FROM proiectbd.carte WHERE idCarte = '" + fields.idCarteV + "';";
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("Carte stearsa!");
+        res.redirect('/views/carte.ejs');
+      });
+    });
+});
+
+
 app.get("/views/autor.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.autor', function(err, result, fields) {
         if(err) throw err;
