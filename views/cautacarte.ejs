@@ -52,11 +52,11 @@
         <br>
         <input form="cautaCarte" type="text" name="Titlu" class="margin">
         <br>
-        <label for="Nume" class="color">Nume </label>
+        <label for="Nume" class="color">Nume Autor </label>
         <br>
         <input form="cautaCarte" type="text" name="Nume" class="margin">
         <br>
-        <label for="Prenume" class="color">Prenume </label>
+        <label for="Prenume" class="color">Prenume Autor </label>
         <br>
         <input form="cautaCarte" type="text" name="Prenume" class="margin">
         <br>
@@ -66,49 +66,51 @@
         <br>
         <input form="cautaCarte" type="submit" class="margin" value="Caută">
     </div>
-    <table>
-        <tr>
-            <th>Titlu</th>
-            <th>Nume</th>
-            <th>Prenume</th>
-            <th>Editură</th>
-            <th>Cameră</th>
-            <th>Limbă</th>
-            <th>Categorie</th>
-            <th>Gen</th>
-            <th>Nr.Pagini</th>
-        </tr>
-        <% if(cauta_ui != null) { for(var i = 0; i < cauta_ui.length; i++) { %>
+    <div class="tablediv">
+        <table>
             <tr>
-                <td>
-                    <%=cauta_ui[i].Titlu %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].Nume %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].Prenume %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].numeEditură %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].Cameră %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].numeLimbă %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].numeCategorie %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].numeGen %>
-                </td>
-                <td>
-                    <%=cauta_ui[i].nrPagini %>
-                </td>
+                <th>Titlu</th>
+                <th>Nume</th>
+                <th>Prenume</th>
+                <th>Editură</th>
+                <th>Cameră</th>
+                <th>Limbă</th>
+                <th>Categorie</th>
+                <th>Gen</th>
+                <th>Nr.Pagini</th>
             </tr>
-        <% } } %>
-    </table>
+            <% if(cauta_ui != null) { for(var i = 0; i < cauta_ui.length; i++) { %>
+                <tr>
+                    <td>
+                        <%=cauta_ui[i].Titlu %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].Nume %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].Prenume %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].numeEditură %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].Cameră %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].numeLimbă %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].numeCategorie %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].numeGen %>
+                    </td>
+                    <td>
+                        <%=cauta_ui[i].nrPagini %>
+                    </td>
+                </tr>
+            <% } } %>
+        </table>
+    </div>
 </body>
 </html>

@@ -610,17 +610,17 @@ app.post("/adaugaInstantaCarte", function (req, res) {
 app.post("/cautaCarte", function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        var sql = 'select Titlu, Nume, Prenume, numeEditură, Cameră, numeLimbă, numeCategorie, numeGen, nrPagini ' +
+        var sql = 'select Titlu, Nume, Prenume, numeEditură, Cameră, numeLimbă, nrPagini, numeGen, numeCategorie ' +
             'from proiectbd.carte join proiectbd.instanțăcarte using(idCarte)' +
             ' join proiectbd.editură using(idEditură)' +
             ' join proiectbd.limbă using(idLimbă)' +
             ' join proiectbd.locație using(idLocație)' +
             ' join proiectbd.autorcarte using(idCarte)' +
             ' join proiectbd.autor using(idAutor)' +
-            ' join proiectbd.gencarte using(idCarte)' +
-            ' join proiectbd.gen using (idGen)' +
-            ' join proiectbd.categorie using(idCategorie)' + 
-            " where numeGen like '%" + fields.gen + "%' and numeCategorie like '%" + fields.categorie +
+            ' left join proiectbd.categorie using(idCategorie)' +
+            ' left join proiectbd.gencarte using(idCarte)' +
+            ' left join proiectbd.gen using (idGen)' +
+            " where coalesce(numeGen, '') like '%" + fields.gen + "%' and coalesce(numeCategorie, '') like '%" + fields.categorie +
             "%' and numeLimbă like '%" + fields.limba + "%' and Cameră like '%" + fields.locatie +
             "%' and lower(Titlu) like '%" + fields.Titlu.toLowerCase() + "%' and lower(Nume) like '%" + fields.Nume.toLowerCase() +
             "%' and lower(Prenume) like '%" + fields.Prenume.toLowerCase() + "%' and lower(numeEditură) like '%" + fields.Editură.toLowerCase() + "%';" 
