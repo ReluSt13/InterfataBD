@@ -15,17 +15,22 @@
         <tr>
             <th>idGen</th>
             <th>Nume Gen</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < genuri_ui.length; i++) { %>
             <tr>
-                <form action="views/gen" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteGen" method="post"></form>
+                <form action="views/gen" method="post"></form>
                     <td>
                         <%=genuri_ui[i].idGen %>
+                        <input type="hidden" name="idGenV" value="<%=genuri_ui[i].idGen %>" form="deleteForm<%=i%>">
                     </td>
                     <td>
                         <%=genuri_ui[i].numeGen %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaGen" method="post">
@@ -39,6 +44,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">
                     <input type="submit" class="button" value="Adauga">

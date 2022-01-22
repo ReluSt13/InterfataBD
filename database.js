@@ -25,7 +25,9 @@ con.connect(function(err) {
 app.get("/", function (req, res) {
     res.render("views/index.ejs");
 });
-
+app.get("/views/cautacarte.ejs", function(req, res) {
+    res.render("views/cautacarte.ejs");
+});
 app.get("/views/index.ejs", function (req, res) {
     res.render("views/index.ejs");
 });
@@ -194,6 +196,23 @@ app.post("/updateAutor", function (req, res) {
     });
 });
 
+app.post("/deleteAutor", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "DELETE FROM proiectbd.autor WHERE idAutor = '" + fields.idAutorV + "';";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Autor sters!");
+        res.redirect('/views/autor.ejs');
+      });
+    });
+});
+
 app.get("/views/categorie.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.categorie order by idCategorie;', function(err, result, fields) {
         if(err) throw err;
@@ -230,6 +249,23 @@ app.post("/adaugaCategorie", function (req, res) {
     });
 });
 
+app.post("/deleteCategorie", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "DELETE FROM proiectbd.categorie WHERE idCategorie = '" + fields.idCategorieV + "';";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Categorie stearsa!");
+        res.redirect('/views/categorie.ejs');
+      });
+    });
+});
+
 app.get("/views/gen.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.gen order by idGen', function(err, result, fields) {
         if(err) throw err;
@@ -261,6 +297,23 @@ app.post("/adaugaGen", function (req, res) {
         console.log(result);
   
         console.log("Gen adaugat!");
+        res.redirect('/views/gen.ejs');
+      });
+    });
+});
+
+app.post("/deleteGen", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+    var sql = "DELETE FROM proiectbd.gen WHERE idGen = '" + fields.idGenV + "';";
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        console.log("Gen sters!");
         res.redirect('/views/gen.ejs');
       });
     });

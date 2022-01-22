@@ -19,15 +19,18 @@
             <th>Prenume</th>
             <th>Data Nasterii</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < autori_ui.length; i++) { %>
             <tr>
                 <form id="updateForm<%=i%>" action="/updateAutor" method="post"></form>
+                <form id="deleteForm<%=i%>" action="/deleteAutor" method="post"></form>
                 <form action="views/autor" method="post"></form>
                     <td>
                         <p id="idAutor<%=i%>"><%=autori_ui[i].idAutor %></p> 
                         <input form="updateForm<%=i%>" type="text" name="idAutor" style="display: none" id="idAutorE<%=i%>" value=<%=autori_ui[i].idAutor %>>
                         <input form="updateForm<%=i%>" type="hidden" name="idAutorV" value=<%=autori_ui[i].idAutor%>>
+                        <input form="deleteForm<%=i%>" type="hidden" name="idAutorV" value=<%=autori_ui[i].idAutor%>>
                     </td>
                     <td>
                         <p id="Nume<%=i%>"><%=autori_ui[i].Nume %></p>
@@ -53,6 +56,9 @@
                         <button type="submit" form="updateForm<%=i%>" style="display: none;" id="saveB<%=i%>">SAVE</button>
                         <button form="updateForm<%=i%>" type="button" style="display: none;" onclick="closeEditA('<%= i %>')" id="cancelB<%=i%>">CANCEL</button>
                     </td>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaAutor" method="post">
@@ -72,6 +78,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>

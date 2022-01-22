@@ -15,17 +15,22 @@
         <tr>
             <th>idCategorie</th>
             <th>Nume Categorie</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < categorii_ui.length; i++) { %>
             <tr>
-                <form action="views/categorie" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteCategorie" method="post"></form>
+                <form action="views/categorie" method="post"></form>
                     <td>
                         <%=categorii_ui[i].idCategorie %>
+                        <input form="deleteForm<%=i%>" name="idCategorieV" type="hidden" value="<%=categorii_ui[i].idCategorie %>">
                     </td>
                     <td>
                         <%=categorii_ui[i].numeCategorie %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaCategorie" method="post">
@@ -39,6 +44,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">
                     <input type="submit" class="button" value="Adauga">
