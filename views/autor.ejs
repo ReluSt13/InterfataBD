@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <script src="../scripts/script.js"></script>
     <title>Autor</title>
 </head>
 <body>
@@ -17,27 +18,41 @@
             <th>Nume</th>
             <th>Prenume</th>
             <th>Data Nasterii</th>
+            <th>Edit</th>
         </tr>
         <% for(var i = 0; i < autori_ui.length; i++) { %>
             <tr>
-                <form action="views/autor" method="post">
+                <form id="updateForm<%=i%>" action="/updateAutor" method="post"></form>
+                <form action="views/autor" method="post"></form>
                     <td>
-                        <%=autori_ui[i].idAutor %>
+                        <p id="idAutor<%=i%>"><%=autori_ui[i].idAutor %></p> 
+                        <input form="updateForm<%=i%>" type="text" name="idAutor" style="display: none" id="idAutorE<%=i%>" value=<%=autori_ui[i].idAutor %>>
+                        <input form="updateForm<%=i%>" type="hidden" name="idAutorV" value=<%=autori_ui[i].idAutor%>>
                     </td>
                     <td>
-                        <%=autori_ui[i].Nume %>
+                        <p id="Nume<%=i%>"><%=autori_ui[i].Nume %></p>
+                        <input form="updateForm<%=i%>" type="text" name="Nume" style="display: none" id="NumeE<%=i%>" value=<%=autori_ui[i].Nume %>>
+
                     </td>
                     <td>
-                        <%=autori_ui[i].Prenume %>
+                        <p id="Prenume<%=i%>"><%=autori_ui[i].Prenume %></p>
+                        <input form="updateForm<%=i%>" type="text" name="Prenume" style="display: none" id="PrenumeE<%=i%>" value=<%=autori_ui[i].Prenume %>>
                     </td>
                     <% if(autori_ui[i].DataNașterii == null) { %>
-                        <td></td>
+                        <td> 
+                            <input type="date" form="updateForm<%=i%>" name="DataNașterii" style="display: none;" id="DataNașteriiE<%=i%>">
+                        </td>
                     <% } else { %>
                         <td>
-                            <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date(autori_ui[i].DataNașterii)) %>
+                            <p id="DataNașterii<%=i%>"><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(new Date(autori_ui[i].DataNașterii)) %></p>
+                            <input type="date" form="updateForm<%=i%>" name="DataNașterii" style="display: none;" id="DataNașteriiE<%=i%>">
                         </td>
                     <% } %>
-                </form>
+                    <td>
+                        <button form="updateForm<%=i%>" type="button" onclick="showEditA('<%= i %>')" id="editB<%=i%>">EDIT</button>
+                        <button type="submit" form="updateForm<%=i%>" style="display: none;" id="saveB<%=i%>">SAVE</button>
+                        <button form="updateForm<%=i%>" type="button" style="display: none;" onclick="closeEditA('<%= i %>')" id="cancelB<%=i%>">CANCEL</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaAutor" method="post">
@@ -57,6 +72,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>

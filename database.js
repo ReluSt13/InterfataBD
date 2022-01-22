@@ -150,6 +150,34 @@ app.post("/adaugaAutor", function (req, res) {
     });
 });
 
+app.post("/updateAutor", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql;
+
+    if(fields.DataNașterii == '') {
+        sql = "UPDATE proiectbd.autor " +
+        "SET idAutor = '" + fields.idAutor + "', Nume = '" + fields.Nume + "', Prenume = '" + fields.Prenume + "', DataNașterii = null WHERE idAutor = '" + 
+        fields.idAutorV + "';";
+    }
+    else {
+        sql = "UPDATE proiectbd.autor " +
+        "SET idAutor = '" + fields.idAutor + "', Nume = '" + fields.Nume + "', Prenume = '" + fields.Prenume + "', DataNașterii = '" + fields.DataNașterii +
+        "' WHERE idAutor = '" + fields.idAutorV + "';";
+        
+    }
+
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("Autor updatat!");
+        res.redirect('/views/autor.ejs');
+      });
+    });
+});
+
 app.get("/views/categorie.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.categorie order by idCategorie;', function(err, result, fields) {
         if(err) throw err;
