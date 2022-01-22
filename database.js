@@ -26,7 +26,51 @@ app.get("/", function (req, res) {
     res.render("views/index.ejs");
 });
 app.get("/views/cautacarte.ejs", function(req, res) {
-    res.render("views/cautacarte.ejs", {cauta_ui: null});
+    var genuri = [];
+    var categorii = [];
+    var limbi = [];
+    var locații = [];
+    con.query('SELECT idGen, numeGen FROM proiectbd.gen order by idGen', function(err, result, fields) {
+        if(err) throw err;
+        result.forEach(function (element) {
+            genuri.push({
+                idGen: element.idGen,
+                numeGen: element.numeGen
+            });
+        }, this);
+        console.log(genuri);
+        con.query('SELECT idCategorie, numeCategorie FROM proiectbd.categorie order by idCategorie', function(err, result, fields) {
+            if(err) throw err;
+            result.forEach(function (element) {
+                categorii.push({
+                    idCategorie: element.idCategorie,
+                    numeCategorie: element.numeCategorie
+                });
+            }, this);
+            console.log(categorii);
+            con.query('SELECT idLimbă, numeLimbă FROM proiectbd.limbă order by idLimbă', function(err, result, fields) {
+                if(err) throw err;
+                result.forEach(function (element) {
+                    limbi.push({
+                        idLimbă: element.idLimbă,
+                        numeLimbă: element.numeLimbă
+                    });
+                }, this);
+                console.log(limbi);
+                con.query('SELECT idLocație, Cameră FROM proiectbd.locație order by idLocație', function(err, result, fields) {
+                    if(err) throw err;
+                    result.forEach(function (element) {
+                        locații.push({
+                            idLocație: element.idLocație,
+                            Cameră: element.Cameră
+                        });
+                    }, this);
+                    console.log(locații);
+                    res.render("views/cautacarte.ejs", {cauta_ui: null, gen_ui: genuri, categ_ui: categorii, limba_ui: limbi, locație_ui: locații});
+                });
+            });
+        });  
+    }); 
 });
 app.get("/views/index.ejs", function (req, res) {
     res.render("views/index.ejs");
@@ -566,9 +610,7 @@ app.post("/adaugaInstantaCarte", function (req, res) {
 app.post("/cautaCarte", function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        var sql
-        if(fields.criteriu1 != ''){
-            sql = 'select Titlu, Nume, Prenume, numeEditură, Cameră, numeLimbă, numeCategorie, numeGen, nrPagini ' +
+        var sql = 'select Titlu, Nume, Prenume, numeEditură, Cameră, numeLimbă, numeCategorie, numeGen, nrPagini ' +
             'from proiectbd.carte join proiectbd.instanțăcarte using(idCarte)' +
             ' join proiectbd.editură using(idEditură)' +
             ' join proiectbd.limbă using(idLimbă)' +
@@ -578,7 +620,10 @@ app.post("/cautaCarte", function (req, res) {
             ' join proiectbd.gencarte using(idCarte)' +
             ' join proiectbd.gen using (idGen)' +
             ' join proiectbd.categorie using(idCategorie)' + 
-            ' where ' + fields.criteriu1 + " = '" + fields.valIntrodusa + "' and pozGen = 1;";
+            " where numeGen like '%" + fields.gen + "%' and numeCategorie like '%" + fields.categorie +
+            "%' and numeLimbă like '%" + fields.limba + "%' and Cameră like '%" + fields.locatie +
+            "%' and lower(Titlu) like '%" + fields.Titlu.toLowerCase() + "%' and lower(Nume) like '%" + fields.Nume.toLowerCase() +
+            "%' and lower(Prenume) like '%" + fields.Prenume.toLowerCase() + "%' and lower(numeEditură) like '%" + fields.Editură.toLowerCase() + "%';" 
         
             con.query(sql, function(err, result, fields) {
                 if(err) throw err;
@@ -599,14 +644,55 @@ app.post("/cautaCarte", function (req, res) {
                     });
                 }, this);
         
-                console.log(cartiGasite);
-        
-                res.render("views/cautacarte.ejs", {cauta_ui: cartiGasite});
+                console.log(sql);
+                var genuri = [];
+                var categorii = [];
+                var limbi = [];
+                var locații = [];
+                con.query('SELECT idGen, numeGen FROM proiectbd.gen order by idGen', function(err, result, fields) {
+                    if(err) throw err;
+                    result.forEach(function (element) {
+                        genuri.push({
+                            idGen: element.idGen,
+                            numeGen: element.numeGen
+                        });
+                    }, this);
+                    console.log(genuri);
+                    con.query('SELECT idCategorie, numeCategorie FROM proiectbd.categorie order by idCategorie', function(err, result, fields) {
+                        if(err) throw err;
+                        result.forEach(function (element) {
+                            categorii.push({
+                                idCategorie: element.idCategorie,
+                                numeCategorie: element.numeCategorie
+                            });
+                        }, this);
+                        console.log(categorii);
+                        con.query('SELECT idLimbă, numeLimbă FROM proiectbd.limbă order by idLimbă', function(err, result, fields) {
+                            if(err) throw err;
+                            result.forEach(function (element) {
+                                limbi.push({
+                                    idLimbă: element.idLimbă,
+                                    numeLimbă: element.numeLimbă
+                                });
+                            }, this);
+                            console.log(limbi);
+                            con.query('SELECT idLocație, Cameră FROM proiectbd.locație order by idLocație', function(err, result, fields) {
+                                if(err) throw err;
+                                result.forEach(function (element) {
+                                    locații.push({
+                                        idLocație: element.idLocație,
+                                        Cameră: element.Cameră
+                                    });
+                                }, this);
+                                console.log(locații);
+                                res.render("views/cautacarte.ejs", {cauta_ui: cartiGasite, gen_ui: genuri, categ_ui: categorii, limba_ui: limbi, locație_ui: locații });
+                            });
+                        });
+                    });  
+                });
+                
             })
-        }
-        else {
-            res.render("views/cautacarte.ejs", {cauta_ui: null})
-        }
+        
     });
     
 });

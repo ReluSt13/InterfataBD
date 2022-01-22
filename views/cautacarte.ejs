@@ -12,20 +12,57 @@
     <div class="container">
         <a href="/views/index.ejs" class="home">HOME</a>
         <br><br>
-        <label for="criteriu1" class="color">Alege un criteriu: </label>
+        <label for="gen" class="color">Gen </label>
         <br>
-        <select form="cautaCarte" name="criteriu1" id="criteriu1" required>
-            <option value="Titlu">Titlu</option>
-            <option value="Nume">Autor</option>
-            <option value="Cameră">Locație</option>
-            <option value="numeEditură">Editură</option>
-            <option value="numeLimbă">Limbă</option>
-            <option value="numeCategorie">Categorie</option>
-            <option value="numeGen">Gen</option>
-            <option value=""></option>
+        <select form="cautaCarte" name="gen" id="gen" required>
+            <% for(var i = 0; i < gen_ui.length; i++) { %>
+                <option value="<%=gen_ui[i].numeGen%>"><%=gen_ui[i].numeGen%></option>
+            <% } %>
+            <option selected="selected"></option>
         </select>
         <br>
-        <input form="cautaCarte" type="text" name="valIntrodusa" class="margin">
+        <label for="categorie" class="color">Categorie </label>
+        <br>
+        <select form="cautaCarte" name="categorie" id="categorie" required>
+            <% for(var i = 0; i < categ_ui.length; i++) { %>
+                <option value="<%=categ_ui[i].numeCategorie%>"><%=categ_ui[i].numeCategorie%></option>
+            <% } %>
+            <option selected="selected"></option>
+        </select>
+        <br>
+        <label for="limba" class="color">Limbă </label>
+        <br>
+        <select form="cautaCarte" name="limba" id="limba" required>
+            <% for(var i = 0; i < limba_ui.length; i++) { %>
+                <option value="<%=limba_ui[i].numeLimbă%>"><%=limba_ui[i].numeLimbă%></option>
+            <% } %>
+            <option selected="selected"></option>
+        </select>
+        <br>
+        <label for="locatie" class="color">Locație </label>
+        <br>
+        <select form="cautaCarte" name="locatie" id="locatie" required>
+            <% for(var i = 0; i < locație_ui.length; i++) { %>
+                <option value="<%=locație_ui[i].Cameră%>"><%=locație_ui[i].Cameră%></option>
+            <% } %>
+            <option selected="selected"></option>
+        </select>
+        <br>
+        <label for="Titlu" class="color">Titlu </label>
+        <br>
+        <input form="cautaCarte" type="text" name="Titlu" class="margin">
+        <br>
+        <label for="Nume" class="color">Nume </label>
+        <br>
+        <input form="cautaCarte" type="text" name="Nume" class="margin">
+        <br>
+        <label for="Prenume" class="color">Prenume </label>
+        <br>
+        <input form="cautaCarte" type="text" name="Prenume" class="margin">
+        <br>
+        <label for="Editură" class="color">Editură </label>
+        <br>
+        <input form="cautaCarte" type="text" name="Editură" class="margin">
         <br>
         <input form="cautaCarte" type="submit" class="margin" value="Caută">
     </div>
