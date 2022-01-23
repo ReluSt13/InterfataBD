@@ -452,6 +452,21 @@ app.post("/adaugaLocatie", function (req, res) {
     });
 });
 
+app.post("/deleteLocatie", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "DELETE FROM proiectbd.locație WHERE idLocație = '" + fields.idLocațieV + "';";
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("Locație ștearsă!");
+        res.redirect('/views/locatie.ejs');
+      });
+    });
+});
+
 app.get("/views/limba.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.limbă order by idLimbă', function(err, result, fields) {
         if(err) throw err;
@@ -483,6 +498,21 @@ app.post("/adaugaLimba", function (req, res) {
         console.log(result);
   
         console.log("Limbă adaugată!");
+        res.redirect('/views/limba.ejs');
+      });
+    });
+});
+
+app.post("/deleteLimba", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "DELETE FROM proiectbd.limbă WHERE idLimbă = '" + fields.idLimbăV + "';";
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("Limbă ștearsă!");
         res.redirect('/views/limba.ejs');
       });
     });
@@ -530,6 +560,22 @@ app.post("/adaugaAutorCarte", function (req, res) {
     });
 });
 
+app.post("/deleteAutorCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "DELETE FROM proiectbd.autorcarte WHERE idAutor = '" + fields.idAutorV +
+    "' and idCarte = '" + fields.idCarteV + "';";
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("autorcarte șters!");
+        res.redirect('/views/autorcarte.ejs');
+      });
+    });
+});
+
 app.get("/views/gencarte.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.gencarte', function(err, result, fields) {
         if(err) throw err;
@@ -567,6 +613,22 @@ app.post("/adaugaGenCarte", function (req, res) {
         if (err) throw err;
         console.log(result);
   
+        res.redirect('/views/gencarte.ejs');
+      });
+    });
+});
+
+app.post("/deleteGenCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "DELETE FROM proiectbd.gencarte WHERE idGen = '" + fields.idGenV +
+    "' and idCarte = '" + fields.idCarteV + "';";
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("gencarte șters!");
         res.redirect('/views/gencarte.ejs');
       });
     });
@@ -621,6 +683,20 @@ app.post("/adaugaInstantaCarte", function (req, res) {
     });
 });
 
+app.post("/deleteInstantaCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "DELETE FROM proiectbd.instanțăcarte WHERE ISBN = '" + fields.ISBNV + "';";
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("instanțăcarte ștearsă!");
+        res.redirect('/views/instantacarte.ejs');
+      });
+    });
+});
 
 app.post("/cautaCarte", function (req, res) {
     var form = new formidable.IncomingForm();

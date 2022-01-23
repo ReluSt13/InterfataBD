@@ -68,7 +68,7 @@ body{
   border: none;
 }
 .button {
-  background-color: #333;
+  background-color: #444;
   border: none;
   color: #fddb3a;
   padding: 5px 5px;
@@ -109,4 +109,22 @@ body{
   position: absolute;
   top: 2%;
   left: 15%;
+}
+button {
+  background-color: #fddb3a;
+  color: #333;
+  border-radius: 5%;
+  padding: 1px 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #f87b07;
+}
+.tablediv1 {
+  position: absolute;
+  top: 2%;
+  left: 8%;
 }

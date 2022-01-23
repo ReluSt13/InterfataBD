@@ -17,20 +17,26 @@
             <th>idAutor</th>
             <th>idCarte</th>
             <th>pozAutor</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < autorcarte_ui.length; i++) { %>
             <tr>
-                <form action="views/autorcarte" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteAutorCarte" method="post"></form>
+                <form action="views/autorcarte" method="post"></form>
                     <td>
                         <%=autorcarte_ui[i].idAutor %>
+                        <input type="hidden" form="deleteForm<%=i%>" name="idAutorV" value="<%=autorcarte_ui[i].idAutor %>">
                     </td>
                     <td>
                         <%=autorcarte_ui[i].idCarte %>
+                        <input type="hidden" form="deleteForm<%=i%>" name="idCarteV" value="<%=autorcarte_ui[i].idCarte %>">
                     </td>
                     <td>
                         <%=autorcarte_ui[i].pozAutor %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaAutorCarte" method="post">
@@ -47,6 +53,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">

@@ -11,7 +11,7 @@
     <div class="container">
         <a href="/views/index.ejs" class="home">HOME</a>
     </div>
-    <div class="tablediv">
+    <div class="tablediv1">
     <table>
         <tr>
             <th>ISBN</th>
@@ -20,12 +20,15 @@
             <th>idLocație</th>
             <th>idLimbă</th>
             <th>nrPagini</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < instantacarte_ui.length; i++) { %>
             <tr>
-                <form action="views/instantacarte" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteInstantaCarte" method="post"></form>
+                <form action="views/instantacarte" method="post"></form>
                     <td>
                         <%=instantacarte_ui[i].ISBN %>
+                        <input type="hidden" form="deleteForm<%=i%>" name="ISBNV" value="<%=instantacarte_ui[i].ISBN %>">
                     </td>
                     <td>
                         <%=instantacarte_ui[i].idCarte %>
@@ -42,7 +45,9 @@
                     <td>
                         <%=instantacarte_ui[i].nrPagini %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaInstantaCarte" method="post">
@@ -68,6 +73,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>

@@ -17,20 +17,26 @@
             <th>idGen</th>
             <th>idCarte</th>
             <th>pozGen</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < gencarte_ui.length; i++) { %>
             <tr>
-                <form action="views/gencarte" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteGenCarte" method="post"></form>
+                <form action="views/gencarte" method="post"></form>
                     <td>
                         <%=gencarte_ui[i].idGen %>
+                        <input type="hidden" form="deleteForm<%=i%>" name="idGenV" value="<%=gencarte_ui[i].idGen %>">
                     </td>
                     <td>
                         <%=gencarte_ui[i].idCarte %>
+                        <input type="hidden" form="deleteForm<%=i%>" name="idCarteV" value="<%=gencarte_ui[i].idCarte %>">
                     </td>
                     <td>
                         <%=gencarte_ui[i].pozGen %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaGenCarte" method="post">
@@ -47,6 +53,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">

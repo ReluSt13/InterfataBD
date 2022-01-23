@@ -16,17 +16,22 @@
         <tr>
             <th>idLocație</th>
             <th>Cameră</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < locații_ui.length; i++) { %>
             <tr>
-                <form action="views/locatie" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteLocatie" method="post"></form>
+                <form action="views/locatie" method="post"></form>
                     <td>
                         <%=locații_ui[i].idLocație %>
+                        <input type="hidden" name="idLocațieV" form="deleteForm<%=i%>" value="<%=locații_ui[i].idLocație %>">
                     </td>
                     <td>
                         <%=locații_ui[i].Cameră %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaLocatie" method="post">
@@ -40,6 +45,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">
                     <input type="submit" class="button" value="Adauga">

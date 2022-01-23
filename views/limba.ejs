@@ -19,14 +19,18 @@
         </tr>
         <% for(var i = 0; i < limbi_ui.length; i++) { %>
             <tr>
-                <form action="views/limba" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteLimba" method="post"></form>
+                <form action="views/limba" method="post"></form>
                     <td>
                         <%=limbi_ui[i].idLimbă %>
+                        <input type="hidden" form="deleteForm<%=i%>" name="idLimbăV" value="<%=limbi_ui[i].idLimbă %>">
                     </td>
                     <td>
                         <%=limbi_ui[i].numeLimbă %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaLimba" method="post">
@@ -40,6 +44,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">
                     <input type="submit" class="button" value="Adauga">
