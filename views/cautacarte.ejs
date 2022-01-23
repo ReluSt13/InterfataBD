@@ -64,11 +64,16 @@
         <br>
         <input form="cautaCarte" type="text" name="Editură" class="margin">
         <br>
+        <label for="ISBN" class="color">ISBN </label>
+        <br>
+        <input form="cautaCarte" type="text" name="ISBN" class="margin">
+        <br>
         <input form="cautaCarte" type="submit" class="margin" value="Caută">
     </div>
     <div class="tablediv">
         <table>
             <tr>
+                <th>ISBN</th>
                 <th>Titlu</th>
                 <th>Nume</th>
                 <th>Prenume</th>
@@ -81,6 +86,9 @@
             </tr>
             <% if(cauta_ui != null) { for(var i = 0; i < cauta_ui.length; i++) { %>
                 <tr>
+                    <td>
+                        <%=cauta_ui[i].ISBN %>
+                    </td>
                     <td>
                         <%=cauta_ui[i].Titlu %>
                     </td>
