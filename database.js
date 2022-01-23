@@ -401,6 +401,21 @@ app.post("/adaugaEditura", function (req, res) {
     });
 });
 
+app.post("/deleteEditura", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "DELETE FROM proiectbd.editură WHERE idEditură = '" + fields.idEditurăV + "';";
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+  
+        console.log("Editură ștearsă!");
+        res.redirect('/views/editura.ejs');
+      });
+    });
+});
+
 app.get("/views/locatie.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.locație order by idLocație', function(err, result, fields) {
         if(err) throw err;
@@ -623,8 +638,14 @@ app.post("/cautaCarte", function (req, res) {
             " where coalesce(numeGen, '') like '%" + fields.gen + "%' and coalesce(numeCategorie, '') like '%" + fields.categorie +
             "%' and numeLimbă like '%" + fields.limba + "%' and Cameră like '%" + fields.locatie +
             "%' and lower(Titlu) like '%" + fields.Titlu.toLowerCase() + "%' and lower(Nume) like '%" + fields.Nume.toLowerCase() +
-            "%' and lower(Prenume) like '%" + fields.Prenume.toLowerCase() + "%' and lower(numeEditură) like '%" + fields.Editură.toLowerCase() + "%';" 
-        
+            "%' and lower(Prenume) like '%" + fields.Prenume.toLowerCase() + "%' and lower(numeEditură) like '%" + fields.Editură.toLowerCase() + "%' " ;
+            if(fields.gen == '') {
+                sql += "and coalesce(pozGen, '1') = 1 ";
+            }
+            if(fields.Nume == '' && fields.Prenume == '') {
+                sql += "and coalesce(pozAutor, '1') = 1 ";
+            }
+            sql += ";";
             con.query(sql, function(err, result, fields) {
                 if(err) throw err;
         

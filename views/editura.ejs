@@ -17,12 +17,15 @@
             <th>idEditură</th>
             <th>Nume Editură</th>
             <th>Oraș</th>
+            <th>Delete</th>
         </tr>
         <% for(var i = 0; i < edituri_ui.length; i++) { %>
             <tr>
-                <form action="views/editura" method="post">
+                <form id="deleteForm<%=i%>" action="/deleteEditura" method="post"></form>
+                <form action="views/editura" method="post"></form>
                     <td>
                         <%=edituri_ui[i].idEditură %>
+                        <input type="hidden" form="deleteForm<%=i%>" name="idEditurăV" value="<%=edituri_ui[i].idEditură %>">
                     </td>
                     <td>
                         <%=edituri_ui[i].numeEditură %>
@@ -30,7 +33,9 @@
                     <td>
                         <%=edituri_ui[i].Oraș %>
                     </td>
-                </form>
+                    <td>
+                        <button form="deleteForm<%=i%>">X</button>
+                    </td>
             </tr>
         <% } %>
         <form action="/adaugaEditura" method="post">
@@ -47,6 +52,7 @@
                     </td>
             </tr>
             <tr>
+                <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit"></td>
                 <td class="submit">
