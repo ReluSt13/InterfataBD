@@ -15,8 +15,26 @@
     <div class="tablediv">
     <table>
         <tr>
-            <th>idCarte</th>
-            <th>Titlu</th>
+            <form id="sortDupaidCarte" action="/sortDupaidCarte" method="post"></form>
+            <form id="sortDupaTitlu" action="/sortDupaTitlu" method="post"></form>
+            <th>
+                idCarte 
+                <input form="sortDupaidCarte" type="hidden" value="idCarte" name="criteriu">
+                <%if(modSort_ui == 'asc') { %>
+                <button form="sortDupaidCarte" name="mod" value="desc">↓</button>
+                <%} else { %>
+                <button form="sortDupaidCarte" name="mod" value="asc">↑</button>
+                <%}%>
+            </th>
+            <th>
+                Titlu
+                <input form="sortDupaTitlu" type="hidden" value="Titlu" name="criteriu">
+                <%if(modSortT_ui == 'asc') { %>
+                <button form="sortDupaTitlu" name="mod" value="desc">↓</button>
+                <%} else { %>
+                <button form="sortDupaTitlu" name="mod" value="asc">↑</button>
+                <%}%>
+            </th>
             <th>idCategorie</th>
             <th>Edit</th>
             <th>Delete</th>

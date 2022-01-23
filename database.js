@@ -91,8 +91,7 @@ app.get("/views/carte.ejs", function (req, res) {
         }, this);
 
         console.log(carti);
-
-        res.render("views/carte.ejs", {carti_ui: carti});
+        res.render("views/carte.ejs", {carti_ui: carti, modSort_ui: 'asc', modSortT_ui: 'asc'});
     })
 });
 
@@ -164,6 +163,55 @@ app.post("/deleteCarte", function (req, res) {
     });
 });
 
+app.post("/sortDupaidCarte", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "SELECT * FROM proiectbd.carte ORDER BY " + fields.criteriu + " " + fields.mod + ";";
+    var modSort = fields.mod;
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+        
+        var carti = [];
+        result.forEach(function (element) {
+            carti.push({
+                idCarte: element.idCarte,
+                Titlu: element.Titlu,
+                idCategorie: element.idCategorie
+            });
+        }, this);
+
+        console.log(carti);
+        res.render('views/carte.ejs', {carti_ui: carti, modSort_ui: modSort, modSortT_ui: 'asc'});
+      });
+    });
+});
+
+app.post("/sortDupaTitlu", function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+    var sql = "SELECT * FROM proiectbd.carte ORDER BY " + fields.criteriu + " " + fields.mod + ";";
+    var modSort = fields.mod;
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        console.log(sql);
+        
+        var carti = [];
+        result.forEach(function (element) {
+            carti.push({
+                idCarte: element.idCarte,
+                Titlu: element.Titlu,
+                idCategorie: element.idCategorie
+            });
+        }, this);
+
+        console.log(carti);
+        res.render('views/carte.ejs', {carti_ui: carti, modSortT_ui: modSort, modSort_ui: 'asc'});
+      });
+    });
+});
 
 app.get("/views/autor.ejs", function (req, res) {
     con.query('SELECT * FROM proiectbd.autor', function(err, result, fields) {
